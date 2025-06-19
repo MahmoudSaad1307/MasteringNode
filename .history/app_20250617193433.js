@@ -1,0 +1,20 @@
+const express = require("express");
+const app = express();
+const productsController = require("./controllers/products.controllers");
+const { body: validateBody, \\ } = require("express-validator");
+app.use(express.json());
+
+app.get("/api/products", productsController.getAllCourses);
+app.get("/api/products/:id", productsController.getCourse);
+
+app.post(
+  "/api/products",
+  validateBody("title")
+    .notEmpty()
+    .withMessage("Title is required")
+    .isLength({ min: 3 }),
+  productsController.addCourse
+);
+
+
+app.listen(1307, () => console.log("Working"));

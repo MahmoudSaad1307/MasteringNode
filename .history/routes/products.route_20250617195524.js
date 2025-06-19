@@ -1,0 +1,14 @@
+
+const express = require("express");
+
+const router=express.Router()
+const { body: validateBody } = require("express-validator");
+const productsController = require("../controllers/products.controllers");
+router.post(
+  "/",
+  
+);
+router.route("/").post(productsController.addCourse).get(productsController.getAllCourses);
+router.get("/:id", productsController.getCourse);
+
+module.exports=router;

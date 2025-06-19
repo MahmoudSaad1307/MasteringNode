@@ -1,0 +1,36 @@
+const express = require("express");
+const app = express();
+
+const products = [{
+
+  id:1,
+  title: "Product 1",
+  price: 100
+}, {
+
+  id:2,
+  title: "Product 2",
+  price: 200
+}];
+
+app.get("/api/products", (req, res) => {
+  res.json(products);
+});
+app.get("/api/product/:id",(req,res)=>{
+  try {
+    const id =+req.params.id;
+    const product=products.find(p=>p.id===id);
+    if (!product) throw new Error(`Product with id ${id} not found`);
+    res.json(product)
+  } catch (error) {
+    res.json(error.message);
+
+    
+  }
+// const id =req.params.id;
+// const product=products.find(p=>p.id===id);
+// res.json(product)
+
+})
+
+app.listen(1307, () => console.log("Working"));
